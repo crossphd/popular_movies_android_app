@@ -3,6 +3,7 @@ package com.crossphd.popularmovies;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcel;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -29,6 +30,14 @@ public class MovieDetail extends AppCompatActivity {
     @BindView(R.id.rating_tv) TextView rating;
     @BindView(R.id.image_iv) ImageView poster;
 
+    private String mTitle;
+    private String mPosterImage;
+    private String mOverview;
+    private String mUserRating;
+    private String mReleaseDate;
+
+
+
 
 //    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -41,6 +50,8 @@ public class MovieDetail extends AppCompatActivity {
 //        if (intent == null) {
 //            closeOnError();
 //        }
+
+
 
         Movie movie = getIntent().getExtras().getParcelable("movie");
         Toast.makeText(this, movie.getmTitle(), Toast.LENGTH_LONG).show();

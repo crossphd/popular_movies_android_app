@@ -77,8 +77,14 @@ public class Movie implements Parcelable {
     }
 
     //constructor used for parcel
+    //constructor used for parcel
     public Movie(Parcel parcel){
-        //read and set saved values from parcel
+
+        mTitle = parcel.readString();
+        mPosterImage = parcel.readString();
+        mOverview = parcel.readString();
+        mUserRating = parcel.readString();
+        mReleaseDate = parcel.readString();
     }
 
     //creator - used when un-parceling our parcle (creating the object)
