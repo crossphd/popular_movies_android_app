@@ -135,9 +135,12 @@ public class QueryUtils {
                 String rating = movie.getString("vote_average");
                 String releaseDate = movie.getString("release_date");
                 String posterFullURL = "http://image.tmdb.org/t/p/w185/"+poster_path;
+                String backdrop_path = movie.getString("backdrop_path");
+                String backdropFullURL = "http://image.tmdb.org/t/p/w500/"+backdrop_path;
+                long id = movie.getLong("id");
 
 
-                Movie m = new Movie(title, posterFullURL, overview, rating, releaseDate);
+                Movie m = new Movie(title, posterFullURL, overview, rating, releaseDate, backdropFullURL, id);
                 movies.add(m);
             }
 

@@ -25,8 +25,12 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Movie>> {
 
+//    video json response sample url: https://api.themoviedb.org/3/movie/499772/videos?api_key=3636e8f94c49efca06551bbd383c9484
+
     public static final String LOG_TAG = MainActivity.class.getSimpleName();
     private static String BUILT_URL ="https://api.themoviedb.org/3/movie/popular?api_key=3636e8f94c49efca06551bbd383c9484";
+    private static String POPULAR_URL = "https://api.themoviedb.org/3/discover/movie?api_key=3636e8f94c49efca06551bbd383c9484&language=en-US&region=US&sort_by=popularity.desc&include_adult=false&page=1";
+    private static String RATING_URL = "https://api.themoviedb.org/3/discover/movie?api_key=3636e8f94c49efca06551bbd383c9484&language=en-US&region=US&sort_by=vote_average.desc&include_adult=false&page=1";
     private MovieAdapter adapter;
     private TextView mEmptyStateTextView;
     private static final int ARTICLE_LOADER_ID = 1;
@@ -39,26 +43,14 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         final GridView movieGridView = findViewById(R.id.movies_grid);
         mEmptyStateTextView = findViewById(R.id.empty_view);
         movieGridView.setEmptyView(mEmptyStateTextView);
-
-        // Create a new {@link ArrayAdapter} of earthquakes
         adapter = new MovieAdapter(MainActivity.this, new ArrayList<Movie>());
-
-        // Set the adapter on the {@link ListView}
-        // so the list can be populated in the user interface
         movieGridView.setAdapter(adapter);
 
         movieGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-
-                Context context = getApplicationContext();
                 Movie m = adapter.getItem(position);
-//                Toast.makeText(context, m.getmTitle(), Toast.LENGTH_LONG).show();
-//                launchDetailActivity(m);
-                Intent intent = new Intent(context, MovieDetail.class);
-//                Movie movieTest = new Movie("test", "test", "test", "test","test");
-                intent.putExtra("movie ", m);
-                startActivity(intent);
+                launchDetailActivity(m);
             }
         });
 
@@ -75,25 +67,15 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             // because this activity implements the LoaderCallbacks interface).
             loaderManager.initLoader(ARTICLE_LOADER_ID, null, this);
         } else {
-//            set error text
             mEmptyStateTextView.setText(R.string.no_internet_connection);
-
         }
     }
 
     private void launchDetailActivity(Movie m) {
-//        Intent intent = new Intent(this, MovieDetail.class);
-//        intent.putExtra(MovieDetail.EXTRA_POSITION, position);
-////        Toast.makeText(this, String.valueOf(position), Toast.LENGTH_LONG).show();
-//        startActivity(intent);
-
-        Intent intent = new Intent(this, MovieDetail.class);
-        Movie movie = m;
-        Movie movieTest = new Movie("test", "test", "test", "test","test");
-        intent.putExtra("movie ", movieTest);
+        Intent intent = new Intent(MainActivity.this, MovieDetail.class);
+        intent.putExtra("movie", m);
         startActivity(intent);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -126,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public Loader<List<Movie>> onCreateLoader(int id, Bundle args) {
         Log.v(LOG_TAG, "onCreateLoader called");
-        return new MovieLoader(this, BUILT_URL);
+        return new MovieLoader(this, POPULAR_URL);
     }
 
     @Override

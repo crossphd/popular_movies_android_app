@@ -34,19 +34,15 @@ public class MovieDetail extends AppCompatActivity {
     TextView rating;
     @BindView(R.id.image_iv)
     ImageView poster;
+    @BindView(R.id.backdrop_iv)
+    ImageView backdrop;
 
 
-    //    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.movie_detail);
         ButterKnife.bind(this);
-
-//        Intent intent = getIntent();
-//        if (intent == null) {
-//            closeOnError();
-//        }
 
 
         Movie movie = getIntent().getParcelableExtra("movie");
@@ -55,10 +51,21 @@ public class MovieDetail extends AppCompatActivity {
         }
         else {
             title.setText(movie.getmTitle());
+            synopsis.setText(movie.getmOverview());
+            releaseDate.setText(movie.getmReleaseDate());
+            rating.setText(movie.getmUserRating());
+            Picasso.with(this)
+                    .load(movie.getmPosterImage())
+                    .centerCrop()
+                    .fit()
+                    .into(poster);
+            Picasso.with(this)
+                    .load(movie.getmBackdrop())
+                    .centerCrop()
+                    .fit()
+                    .into(backdrop);
         }
 
-//        Toast.makeText(this, movie.toString(), Toast.LENGTH_LONG).show();
-//        title.setText("title");
 
     }
 }
