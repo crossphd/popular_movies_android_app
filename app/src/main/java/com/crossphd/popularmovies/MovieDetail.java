@@ -49,10 +49,16 @@ public class MovieDetail extends AppCompatActivity {
 //        }
 
 
-        Movie movie = getIntent().getExtras().getParcelable("movie");
+        Movie movie = getIntent().getParcelableExtra("movie");
+        if (movie == null) {
+            Toast.makeText(this, "movie is null", Toast.LENGTH_LONG).show();
+        }
+        else {
+            title.setText(movie.getmTitle());
+        }
+
 //        Toast.makeText(this, movie.toString(), Toast.LENGTH_LONG).show();
 //        title.setText("title");
-        title.setText(movie.getmTitle());
 
     }
 }
