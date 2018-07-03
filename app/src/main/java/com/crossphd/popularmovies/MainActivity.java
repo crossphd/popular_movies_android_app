@@ -87,7 +87,7 @@ public class MainActivity
 
     private void setUpSharedPreferences() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String sort = sharedPreferences.getString("sort_order", null);
+        String sort = sharedPreferences.getString("sort_order", "1");
 //        Log.v(LOG_TAG, "******************  shared preferences sort order = " + sort + " ********************");
 //        Log.v(LOG_TAG, "******************  APIKEY = " + API_KEY + " ********************");
         if (sort.equals("1")) {
