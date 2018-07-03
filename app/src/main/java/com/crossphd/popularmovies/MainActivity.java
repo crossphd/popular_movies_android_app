@@ -33,8 +33,8 @@ public class MainActivity
     public static final String LOG_TAG = MainActivity.class.getSimpleName();
     private static String BUILT_URL ="";
     String API_KEY = BuildConfig.MY_MOVIE_DB_API_KEY;
-    private String POPULAR_URL = String.format("https://api.themoviedb.org/3/discover/movie?api_key=%s&language=en-US&region=US&sort_by=popularity.desc&include_adult=false&page=1", API_KEY);
-    private String RATING_URL = String.format("https://api.themoviedb.org/3/discover/movie?api_key=%s&language=en-US&region=US&sort_by=vote_average.desc&include_adult=false&page=1", API_KEY);
+    private String POPULAR_URL = String.format("https://api.themoviedb.org/3/movie/popular?api_key=%s&language=en-US&region=US&include_adult=false&page=1", API_KEY);
+    private String RATING_URL = String.format("https://api.themoviedb.org/3/movie/top_rated?api_key=%s&language=en-US&region=US&include_adult=false&page=1", API_KEY);
     private MovieAdapter adapter;
     private TextView mEmptyStateTextView;
     private static final int ARTICLE_LOADER_ID = 1;
